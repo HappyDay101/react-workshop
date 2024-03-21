@@ -4,6 +4,7 @@
   gap: 24px;
   padding: 24px;
   height: fit-content;
+  background-color: white;
 }
 
 @media (min-width: 700px) {

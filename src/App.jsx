@@ -10,21 +10,26 @@ export default function App() {
 
   // React hook for states
   const [cafes, setCafes] = React.useState([]);
+
+  // Reach hooks Effect: make sure that its code is executed Just at the furst render
+  React.useEffect(() => {
+    const url = "https://matcha-and-keyboard-f549965e60e7.herokuapp.com/api/v1/cafes";
+    fetch(url)
+    .then(response => response.json())
+    .then(data => {
+      setCafes(data);
+      // data.forEach( cafeData => {
+      // });
+    });
+  }, []);
   // cafes which is the stat
   // setCafes is function that changes the state for example: setCafes([..., ...])
 
-  const url = "https://matcha-and-keyboard-f549965e60e7.herokuapp.com/api/v1/cafes";
-  fetch(url)
-  .then(response => response.json())
-  .then(data => {
-    setCafes(data);
-    // data.forEach( cafeData => {
-    // });
-  });
+
 
   return(
     <div className="app-frame">
-      <Navbar />
+      <Navbar setCafes={setCafes}/>
       <div className="app-body">
         <Sidebar />
         <CafeList cafes={cafes}/>
